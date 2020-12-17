@@ -1,6 +1,7 @@
 package cp510.assignments.assignment9;
 
 import java.awt.Image;
+import java.util.List;
 
 public abstract class ChessPiece {
     private String name;
@@ -14,9 +15,7 @@ public abstract class ChessPiece {
         this.color = color;
     }
     
-//    public abstract List<ChessPoint> getValidMoves​(ChessPieceMap chessMap) {
-//        return new ArrayList<ChessPoint>();
-//    }
+    public abstract List<ChessPoint> getValidMoves​(ChessPieceMap chessMap);
     
     public String getName() {
         return this.name;

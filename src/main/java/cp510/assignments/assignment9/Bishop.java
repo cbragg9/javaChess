@@ -47,7 +47,7 @@ public class Bishop extends ChessPiece {
             }
         }
         
-        // Move DL (Row++, Column++)
+        // Move DL (Row++, Column--)
         for (int i = currentLocation.getCol(); i > 0; i--) {
             ChessPoint leftOne = new ChessPoint(currentLocation.getRow(),i-1);
             if (chessMap.get(leftOne) == null) {
@@ -59,5 +59,5 @@ public class Bishop extends ChessPiece {
         }
         
         return validMoves;
-
+    }
 }
