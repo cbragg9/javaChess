@@ -3,16 +3,29 @@ package cp510.assignments.assignment9;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Encapsulates the characteristics of a bishop on a chess board. 
+ * @author cbragg
+ *
+ */
 public class Bishop extends ChessPiece {
     
+    /** Constructor.
+     * @param color The color of this bishop
+     */
     public Bishop(ChessColor color) {
         super("Bishop", "", color);
     }
     
 
+    /** Given the state of a chess board calculate all valid moves for this 
+     *  Rook.If there are no valid moves an empty list will be returned.
+     * 
+     * @param chessMap
+     * @return ArrayList of valid moves
+     */
     public List<ChessPoint> getValidMoves(ChessPieceMap chessMap) {
         ArrayList<ChessPoint> validMoves = new ArrayList<ChessPoint>();
-        ChessPoint currentLocation = chessMap.getKey​(this);
+        ChessPoint currentLocation = chessMap.getKey(this);
         
         // Move DL (Row++, Column--)
         int dlRow = currentLocation.getRow() + 1;
@@ -22,7 +35,8 @@ public class Bishop extends ChessPiece {
             if (chessMap.get(moveDL) == null) {
                 validMoves.add(moveDL);
             } else {
-                if (chessMap.get(moveDL).getColor() != this.getColor()) validMoves.add(moveDL);
+                if (chessMap.get(moveDL).getColor() != this.getColor()) 
+                    validMoves.add(moveDL);
                 break;
             }
             dlRow += 1;
@@ -37,7 +51,8 @@ public class Bishop extends ChessPiece {
             if (chessMap.get(moveUl) == null) {
                 validMoves.add(moveUl);
             } else {
-                if (chessMap.get(moveUl).getColor() != this.getColor()) validMoves.add(moveUl);
+                if (chessMap.get(moveUl).getColor() != this.getColor()) 
+                    validMoves.add(moveUl);
                 break;
             }
             ulRow -= 1;
@@ -52,7 +67,8 @@ public class Bishop extends ChessPiece {
             if (chessMap.get(moveUR) == null) {
                 validMoves.add(moveUR);
             } else {
-                if (chessMap.get(moveUR).getColor() != this.getColor()) validMoves.add(moveUR);
+                if (chessMap.get(moveUR).getColor() != this.getColor()) 
+                    validMoves.add(moveUR);
                 break;
             }
             urRow -= 1;
@@ -67,7 +83,8 @@ public class Bishop extends ChessPiece {
             if (chessMap.get(moveDR) == null) {
                 validMoves.add(moveDR);
             } else {
-                if (chessMap.get(moveDR).getColor() != this.getColor()) validMoves.add(moveDR);
+                if (chessMap.get(moveDR).getColor() != this.getColor()) 
+                    validMoves.add(moveDR);
                 break;
             }
             drRow += 1;

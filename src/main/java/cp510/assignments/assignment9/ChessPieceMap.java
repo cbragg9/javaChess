@@ -2,15 +2,39 @@ package cp510.assignments.assignment9;
 
 import java.util.HashMap;
 
-@SuppressWarnings("serial")
+/** Encapsulates a mapping from a ChessPoint to a ChessPiece.
+ * @author cbragg
+ *
+ */
 public class ChessPieceMap extends HashMap<ChessPoint, ChessPiece> {
     
+    /**
+     * Default serial version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /** Constructor. Creates a <ChessPoint,ChessPiece> map with an 
+     *  initial size of 100, and a load factor of .75.
+     * 
+     */
     public ChessPieceMap() {
         super(100, (float) 0.75);
     }
     
+    /** Returns the ChessPiece mapped to the given ChessPoint. 
+     *  This method is identical to Map<ChessPoint,ChessPiece>.get, 
+     *  but throws an exception if the given point is not a valid square. 
+     *  Returns null if the ChessPoint is not in the map.
+     * @param point The key to the target ChessPiece.
+     * @return The value associated with the key, or null if none found.
+     * @throws ChessException Throws ChessException if the given ChessPoint 
+     * is not a valid square.
+     */
     public ChessPiece get(ChessPoint point) throws ChessException {
-        if (point.getRow() > 7 || point.getRow() < 0 || point.getCol() > 7 || point.getRow() < 0) throw new ChessException();
+        if (point.getRow() > 7 || 
+            point.getRow() < 0 || 
+            point.getCol() > 7 || 
+            point.getRow() < 0) throw new ChessException();
         for (ChessPoint i : this.keySet()) {
             if (i.getRow() == point.getRow() && i.getCol() == point.getCol()) {
                 return super.get(i);
@@ -19,39 +43,62 @@ public class ChessPieceMap extends HashMap<ChessPoint, ChessPiece> {
         return super.get(point);
     }
     
-    public ChessPoint getKey​(ChessPiece piece) {
+    /** Gets the key associated with the given value. 
+     *  Returns null if the given value cannot be found.
+     * @param piece The chess piece to be found.
+     * @return The key associated with the given value, or 
+     * null if the value cannot be found
+     */
+    public ChessPoint getKey(ChessPiece piece) {
         for (ChessPoint i : this.keySet()) {
-            if (super.get(i).getName() == piece.getName() && super.get(i).getColor() == piece.getColor()) {
+            if (super.get(i).getName() == piece.getName() && 
+                super.get(i).getColor() == piece.getColor()) {
                 return i;
             }
         } 
         return null;
     }
     
-    public ChessPiece put​(ChessPoint point, ChessPiece piece) throws ChessException {
+    /** Adds a ChessPoint/ChessPiece entry to the map. 
+     *  Null values are not permitted. 
+     *  This method is identical to Map<ChessPoint,ChessPiece>.put, 
+     *  but throws an exception if the given point is not a valid square on a 
+     *  chess board, or the given value is null.
+     * @param point The key for the new entry.
+     * @param piece The value for the new entry.
+     * @return The value previously associated with the key, or null if none.
+     * @throws ChessException Throws ChessException if the given key is not a 
+     * valid square on a chess board, or if the given value is null.
+     */
+    public ChessPiece put (ChessPoint point, ChessPiece piece)
+        throws ChessException {
         ChessPiece removed = this.get(point);
         super.put(point, piece);
         return removed;
     }
     
+    /** Instantiates a ChessMap with all pieces in the traditional 
+     *  start positions; a black rook will be in square (0, 0).
+     * @return A ChessMap with all pieces in the traditional start positions.
+     */
     public static ChessPieceMap newGame() {
         ChessPieceMap newGame = new ChessPieceMap();
-        Rook R = new Rook(ChessColor.WHITE);
-        Knight K = new Knight(ChessColor.WHITE);
-        Bishop B = new Bishop(ChessColor.WHITE);
-        King KI = new King(ChessColor.WHITE);
-        Queen Q = new Queen(ChessColor.WHITE);
-        Bishop B2 = new Bishop(ChessColor.WHITE);
-        Knight K2 = new Knight(ChessColor.WHITE);
-        Rook R2 = new Rook(ChessColor.WHITE);
-        Pawn P1 = new Pawn(ChessColor.WHITE);
-        Pawn P2 = new Pawn(ChessColor.WHITE);
-        Pawn P3 = new Pawn(ChessColor.WHITE);
-        Pawn P4 = new Pawn(ChessColor.WHITE);
-        Pawn P5 = new Pawn(ChessColor.WHITE);
-        Pawn P6 = new Pawn(ChessColor.WHITE);
-        Pawn P7 = new Pawn(ChessColor.WHITE);
-        Pawn P8 = new Pawn(ChessColor.WHITE);
+        Rook whiteR = new Rook(ChessColor.WHITE);
+        Knight whiteK = new Knight(ChessColor.WHITE);
+        Bishop whiteB = new Bishop(ChessColor.WHITE);
+        King whiteKI = new King(ChessColor.WHITE);
+        Queen whiteQ = new Queen(ChessColor.WHITE);
+        Bishop whiteB2 = new Bishop(ChessColor.WHITE);
+        Knight whiteK2 = new Knight(ChessColor.WHITE);
+        Rook whiteR2 = new Rook(ChessColor.WHITE);
+        Pawn whiteP1 = new Pawn(ChessColor.WHITE);
+        Pawn whiteP2 = new Pawn(ChessColor.WHITE);
+        Pawn whiteP3 = new Pawn(ChessColor.WHITE);
+        Pawn whiteP4 = new Pawn(ChessColor.WHITE);
+        Pawn whiteP5 = new Pawn(ChessColor.WHITE);
+        Pawn whiteP6 = new Pawn(ChessColor.WHITE);
+        Pawn whiteP7 = new Pawn(ChessColor.WHITE);
+        Pawn whiteP8 = new Pawn(ChessColor.WHITE);
         Rook r = new Rook(ChessColor.BLACK);
         Knight k = new Knight(ChessColor.BLACK);
         Bishop b = new Bishop(ChessColor.BLACK);
@@ -85,22 +132,22 @@ public class ChessPieceMap extends HashMap<ChessPoint, ChessPiece> {
         ChessPoint p6point = new ChessPoint(1, 5);
         ChessPoint p7point = new ChessPoint(1, 6);
         ChessPoint p8point = new ChessPoint(1, 7);
-        ChessPoint Rpoint = new ChessPoint(7, 0);
-        ChessPoint Kpoint = new ChessPoint(7, 1);
-        ChessPoint Bpoint = new ChessPoint(7, 2);
-        ChessPoint KIpoint = new ChessPoint(7, 3);
-        ChessPoint Qpoint = new ChessPoint(7, 4);
-        ChessPoint B2point = new ChessPoint(7, 5);
-        ChessPoint K2point = new ChessPoint(7, 6);
-        ChessPoint R2point = new ChessPoint(7, 7);
-        ChessPoint P1point = new ChessPoint(6, 0);
-        ChessPoint P2point = new ChessPoint(6, 1);
-        ChessPoint P3point = new ChessPoint(6, 2);
-        ChessPoint P4point = new ChessPoint(6, 3);
-        ChessPoint P5point = new ChessPoint(6, 4);
-        ChessPoint P6point = new ChessPoint(6, 5);
-        ChessPoint P7point = new ChessPoint(6, 6);
-        ChessPoint P8point = new ChessPoint(6, 7);
+        ChessPoint pointR = new ChessPoint(7, 0);
+        ChessPoint pointK = new ChessPoint(7, 1);
+        ChessPoint pointB = new ChessPoint(7, 2);
+        ChessPoint pointKi = new ChessPoint(7, 3);
+        ChessPoint pointQ = new ChessPoint(7, 4);
+        ChessPoint pointB2 = new ChessPoint(7, 5);
+        ChessPoint pointK2 = new ChessPoint(7, 6);
+        ChessPoint pointR2 = new ChessPoint(7, 7);
+        ChessPoint pointP1 = new ChessPoint(6, 0);
+        ChessPoint pointP2 = new ChessPoint(6, 1);
+        ChessPoint pointP3 = new ChessPoint(6, 2);
+        ChessPoint pointP4 = new ChessPoint(6, 3);
+        ChessPoint pointP5 = new ChessPoint(6, 4);
+        ChessPoint pointP6 = new ChessPoint(6, 5);
+        ChessPoint pointP7 = new ChessPoint(6, 6);
+        ChessPoint pointP8 = new ChessPoint(6, 7);
         
         
         newGame.put(rpoint, r);
@@ -119,22 +166,22 @@ public class ChessPieceMap extends HashMap<ChessPoint, ChessPiece> {
         newGame.put(p6point, p6);
         newGame.put(p7point, p7);
         newGame.put(p8point, p8);
-        newGame.put(Rpoint, R);
-        newGame.put(Kpoint, K);
-        newGame.put(Bpoint, B);
-        newGame.put(KIpoint, KI);
-        newGame.put(Qpoint, Q);
-        newGame.put(B2point, B2);
-        newGame.put(K2point, K2);
-        newGame.put(R2point, R2);
-        newGame.put(P1point, P1);
-        newGame.put(P2point, P2);
-        newGame.put(P3point, P3);
-        newGame.put(P4point, P4);
-        newGame.put(P5point, P5);
-        newGame.put(P6point, P6);
-        newGame.put(P7point, P7);
-        newGame.put(P8point, P8);
+        newGame.put(pointR, whiteR);
+        newGame.put(pointK, whiteK);
+        newGame.put(pointB, whiteB);
+        newGame.put(pointKi, whiteKI);
+        newGame.put(pointQ, whiteQ);
+        newGame.put(pointB2, whiteB2);
+        newGame.put(pointK2, whiteK2);
+        newGame.put(pointR2, whiteR2);
+        newGame.put(pointP1, whiteP1);
+        newGame.put(pointP2, whiteP2);
+        newGame.put(pointP3, whiteP3);
+        newGame.put(pointP4, whiteP4);
+        newGame.put(pointP5, whiteP5);
+        newGame.put(pointP6, whiteP6);
+        newGame.put(pointP7, whiteP7);
+        newGame.put(pointP8, whiteP8);
                         
         return newGame;
     }
