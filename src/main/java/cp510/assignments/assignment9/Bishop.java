@@ -15,47 +15,63 @@ public class Bishop extends ChessPiece {
         ChessPoint currentLocation = chessMap.getKey​(this);
         
         // Move DL (Row++, Column--)
-        for (int i = currentLocation.getRow(); i < 7; i++) {
-            ChessPoint downOne = new ChessPoint(i + 1,currentLocation.getCol());
-            if (chessMap.get(downOne) == null) {
-                validMoves.add(downOne);
+        int dlRow = currentLocation.getRow() + 1;
+        int dlCol = currentLocation.getCol() - 1;
+        while (dlRow <= 7 && dlCol <= 7 && dlRow >= 0 && dlCol >= 0) {
+            ChessPoint moveDL = new ChessPoint(dlRow, dlCol);
+            if (chessMap.get(moveDL) == null) {
+                validMoves.add(moveDL);
             } else {
-                if (chessMap.get(downOne).getColor() != this.getColor()) validMoves.add(downOne);
+                if (chessMap.get(moveDL).getColor() != this.getColor()) validMoves.add(moveDL);
                 break;
             }
+            dlRow += 1;
+            dlCol -= 1;
         }
         
         // Move UL (Row--, Column--)
-        for (int i = currentLocation.getRow(); i > 0; i--) {
-            ChessPoint upOne = new ChessPoint(i - 1,currentLocation.getCol());
-            if (chessMap.get(upOne) == null) {
-                validMoves.add(upOne);
+        int ulRow = currentLocation.getRow() - 1;
+        int ulCol = currentLocation.getCol() - 1;
+        while (ulRow <= 7 && ulCol <= 7 && ulRow >= 0 && ulCol >= 0) {
+            ChessPoint moveUl = new ChessPoint(ulRow, ulCol);
+            if (chessMap.get(moveUl) == null) {
+                validMoves.add(moveUl);
             } else {
-                if (chessMap.get(upOne).getColor() != this.getColor()) validMoves.add(upOne);
+                if (chessMap.get(moveUl).getColor() != this.getColor()) validMoves.add(moveUl);
                 break;
             }
+            ulRow -= 1;
+            ulCol -= 1;
         }
         
         // Move UR (Row--, Column++)
-        for (int i = currentLocation.getCol(); i < 7; i++) {
-            ChessPoint rightOne = new ChessPoint(currentLocation.getRow(),i+1);
-            if (chessMap.get(rightOne) == null) {
-                validMoves.add(rightOne);
+        int urRow = currentLocation.getRow() - 1;
+        int urCol = currentLocation.getCol() + 1;
+        while (urRow <= 7 && urCol <= 7 && urRow >= 0 && urCol >= 0) {
+            ChessPoint moveUR = new ChessPoint(urRow, urCol);
+            if (chessMap.get(moveUR) == null) {
+                validMoves.add(moveUR);
             } else {
-                if (chessMap.get(rightOne).getColor() != this.getColor()) validMoves.add(rightOne);
+                if (chessMap.get(moveUR).getColor() != this.getColor()) validMoves.add(moveUR);
                 break;
             }
+            urRow -= 1;
+            urCol += 1;
         }
         
-        // Move DL (Row++, Column--)
-        for (int i = currentLocation.getCol(); i > 0; i--) {
-            ChessPoint leftOne = new ChessPoint(currentLocation.getRow(),i-1);
-            if (chessMap.get(leftOne) == null) {
-                validMoves.add(leftOne);
+        // Move DR (Row++, Column++)
+        int drRow = currentLocation.getRow() + 1;
+        int drCol = currentLocation.getCol() + 1;
+        while (drRow <= 7 && drCol <= 7 && drRow >= 0 && drCol >= 0) {
+            ChessPoint moveDR = new ChessPoint(drRow, drCol);
+            if (chessMap.get(moveDR) == null) {
+                validMoves.add(moveDR);
             } else {
-                if (chessMap.get(leftOne).getColor() != this.getColor()) validMoves.add(leftOne);
+                if (chessMap.get(moveDR).getColor() != this.getColor()) validMoves.add(moveDR);
                 break;
             }
+            drRow += 1;
+            drCol += 1;
         }
         
         return validMoves;
